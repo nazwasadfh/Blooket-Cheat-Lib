@@ -2,12 +2,13 @@
 Now ur the winner
 # How to use
 *download only the html file!!*
-
-💻on pc:
+# 💻on pc:
 open blooket site
 open browser console (e.g. chrome one is ctrl+shift+j)
 and paste copped script
-📱on phone:
+
+
+# 📱on phone:
 install 'kiwi browser beta' (not that one from google play) by going to https://github.com/kiwibrowser/src.next/releases/tag/14310011181
 (or any other browser with dev tools, but i think its the only one)
 open blooket site
