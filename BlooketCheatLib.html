@@ -242,7 +242,7 @@
         // Ładowanie danych z JSON
         async function loadCheats() {
             try {
-                const response = await fetch('cheats.json');
+                const response = await fetch('https://raw.githubusercontent.com/nazwasadfh/Blooket-Cheat-Lib/main/cheats.json');
                 if (!response.ok) {
                     throw new Error('Nie można załadować pliku JSON');
                 }
