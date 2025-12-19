@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blooket Cheat Library</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px solid #4cc9f0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        h1 {
+            color: #4cc9f0;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+        }
+        
+        .subtitle {
+            color: #a9b7c6;
+            font-size: 1.1rem;
+        }
+        
+        .category {
+            background: rgba(30, 30, 46, 0.8);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid #2d2d44;
+            transition: all 0.3s ease;
+        }
+        
+        .category:hover {
+            border-color: #4cc9f0;
+            box-shadow: 0 5px 15px rgba(76, 201, 240, 0.2);
+        }
+        
+        .category-header {
+            background: linear-gradient(90deg, #2d2d44, #3d3d5c);
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #4cc9f0;
+        }
+        
+        .category-header:hover {
+            background: linear-gradient(90deg, #3d3d5c, #4d4d6c);
+        }
+        
+        .category-content {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        
+        .category.open .category-content {
+            max-height: 5000px;
+            padding: 20px;
+        }
+        
+        .arrow {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+        }
+        
+        .category.open .arrow {
+            transform: rotate(90deg);
+        }
+        
+        .cheat-btn {
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cheat-btn:hover {
+            background: linear-gradient(135deg, #4895ef, #4361ee);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cheat-btn:active {
+            transform: translateY(0);
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4cc9f0;
+            color: #1a1a2e;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #a9b7c6;
+            font-size: 0.9rem;
+            border-top: 1px solid #2d2d44;
+        }
+        
+        .warning {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #4cc9f0;
+        }
+        
+        @media (max-width: 768px) {
+            .category-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Blooket Cheat Library</h1>
+            <p class="subtitle">Kliknij przycisk, aby skopiować skrypt do schowka. Wklej w konsoli (F12) na odpowiedniej stronie Blooket.</p>
+            <div class="warning">
+                ⚠️ <strong>Uwaga:</strong> Używaj tylko na własnych kontach. Niektóre skrypty mogą wymagać bycia na konkretnej stronie Blooket.
+            </div>
+        </header>
+        
+        <div id="categories-container">
+            <div class="loading" id="loading">
+                <p>Ładowanie skryptów...</p>
+                <div style="width: 50px; height: 50px; border: 5px solid #4cc9f0; border-top-color: transparent; border-radius: 50%; margin: 20px auto; animation: spin 1s linear infinite;"></div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>📌 <strong>Instrukcja:</strong> Kliknij przycisk, skopiuj kod, otwórz konsolę (F12 → Console) na stronie Blooket, wklej i wciśnij Enter.</p>
+            <p>⚠️ Używaj ostrożnie. Niektóre skrypty mogą nie działać na najnowszej wersji Blooket.</p>
+        </footer>
+    </div>
+    
+    <div class="notification" id="notification">Skrypt skopiowany do schowka!</div>
+
+    <script>
+        // Animacja ładowania
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Kategorie w kolejności
+        const categoryOrder = [
+            { id: 'global', name: '🌍 Global Cheats (Działają w każdym trybie)' },
+            { id: 'gold', name: '💰 Gold Quest' },
+            { id: 'crypto', name: '🔐 Crypto Hack' },
+            { id: 'fishing', name: '🎣 Fishing Frenzy' },
+            { id: 'pirate', name: '🏴‍☠️ Pirate\'s Voyage' },
+            { id: 'defense2', name: '🏰 Tower Defense 2' },
+            { id: 'brawl', name: '👹 Monster Brawl' },
+            { id: 'dino', name: '🦖 Deceptive Dinos' },
+            { id: 'royale', name: '👑 Battle Royale' },
+            { id: 'defense', name: '⚔️ Tower Defense' },
+            { id: 'cafe', name: '☕ Cafe' },
+            { id: 'factory', name: '🏭 Factory' },
+            { id: 'racing', name: '🏎️ Racing' },
+            { id: 'rush', name: '⚡ Blook Rush' },
+            { id: 'tower', name: '🗼 Tower of Doom' },
+            { id: 'kingdom', name: '🏰 Crazy Kingdom' },
+            { id: 'toy', name: '🎅 Santa\'s Workshop' },
+            { id: 'flappy', name: '🐦 Flappy Blook' },
+            { id: 'custom', name: '✨ Custom / Extra' }
+        ];
+        
+        let cheatsData = {};
+        
+        // Ładowanie danych z JSON
+        async function loadCheats() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/nazwasadfh/Blooket-Cheat-Lib/main/cheats.json');
+                if (!response.ok) {
+                    throw new Error('Nie można załadować pliku JSON');
+                }
+                cheatsData = await response.json();
+                renderCategories();
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                document.getElementById('loading').innerHTML = `
+                    <p style="color: #ff4444;">Błąd ładowania skryptów: ${error.message}</p>
+                    <p>Upewnij się, że plik cheats.json znajduje się w tym samym folderze.</p>
+                `;
+                console.error('Błąd ładowania cheats:', error);
+            }
+        }
+        
+        // Renderowanie kategorii
+        function renderCategories() {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = '';
+            
+            categoryOrder.forEach(category => {
+                if (cheatsData[category.id] && cheatsData[category.id].length > 0) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'category';
+                    categoryDiv.id = category.id;
+                    
+                    // Nagłówek kategorii
+                    const header = document.createElement('div');
+                    header.className = 'category-header';
+                    header.innerHTML = `
+                        <span>${category.name}</span>
+                        <span class="arrow">▶</span>
+                    `;
+                    
+                    // Zawartość kategorii
+                    const content = document.createElement('div');
+                    content.className = 'category-content';
+                    
+                    // Przyciski dla każdego skryptu
+                    cheatsData[category.id].forEach(cheat => {
+                        const button = document.createElement('button');
+                        button.className = 'cheat-btn';
+                        button.textContent = cheat.name;
+                        button.dataset.code = cheat.code;
+                        content.appendChild(button);
+                    });
+                    
+                    // Event listener dla nagłówka
+                    header.addEventListener('click', () => {
+                        categoryDiv.classList.toggle('open');
+                    });
+                    
+                    // Event listener dla przycisków
+                    content.addEventListener('click', (e) => {
+                        if (e.target.classList.contains('cheat-btn')) {
+                            copyToClipboard(e.target.dataset.code, e.target.textContent);
+                        }
+                    });
+                    
+                    categoryDiv.appendChild(header);
+                    categoryDiv.appendChild(content);
+                    container.appendChild(categoryDiv);
+                }
+            });
+            
+            // Otwórz pierwszą kategorię
+            const firstCategory = container.querySelector('.category');
+            if (firstCategory) {
+                firstCategory.classList.add('open');
+            }
+        }
+        
+        // Kopiowanie do schowka
+        async function copyToClipboard(code, cheatName) {
+            try {
+                await navigator.clipboard.writeText(code);
+                showNotification(`"${cheatName}" skopiowany!`);
+            } catch (err) {
+                // Fallback dla starszych przeglądarek
+                const textArea = document.createElement('textarea');
+                textArea.value = code;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification(`"${cheatName}" skopiowany (fallback)!`);
+            }
+        }
+        
+        // Pokazywanie powiadomienia
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.background = isError ? '#ff4444' : '#4cc9f0';
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Obsługa hash w URL
+        window.addEventListener('DOMContentLoaded', () => {
+            loadCheats();
+            
+            // Po załadowaniu danych, sprawdź hash
+            setTimeout(() => {
+                if (window.location.hash) {
+                    const sectionId = window.location.hash.substring(1);
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        section.classList.add('open');
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }, 1000);
+        });
+        
+        // Zapisz hash przy kliknięciu
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('category-header')) {
+                const categoryId = e.target.parentElement.id;
+                window.location.hash = categoryId;
+            }
+        });
+    </script>
+</body>
+</html>
