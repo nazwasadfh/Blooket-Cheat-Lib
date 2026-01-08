@@ -13,8 +13,15 @@ and paste copped script
 
 
 # 📱on phone:
+~OLD WAY:
 install 'kiwi browser beta' (not that one from google play) by going to https://github.com/kiwibrowser/src.next/releases/tag/14310011181
 (or any other browser with dev tools, but i think its the only one)
 open blooket site
 press 3 dots and developer tools
-dev tools will open in other tab. press the square to change the tab. you can now paste these scripts normally.
+dev tools will open in other tab. press the square to change the tab. you can now paste these scripts normally.~
+NEW WAY:
+1. install Lemour Browser app (https://play.google.com/store/apps/details?id=com.lemurbrowser.exts) and go to blooket site (most of cheats work only in game).
+2. press the 4 blocks button on the down bar
+3. press devtools ans go to console
+4. paste your copped script from tiny.pl/01nk-s2v
+(dev tools open in new tab. to go back to blooket, just change the tab. it may sometimes require to re open the devtools)
